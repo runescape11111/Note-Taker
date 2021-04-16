@@ -1,4 +1,4 @@
-const allNotes = require("../db/notes");
+const { allNotes } = require("../db");
 let id = 1;
 
 module.exports = (app) => {

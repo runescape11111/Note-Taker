@@ -24,4 +24,4 @@ class Notes {
 };
 
 const allNotes = new Notes('notes');
-    module.exports = allNotes;
+    module.exports = { allNotes };
