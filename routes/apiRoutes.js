@@ -1,5 +1,4 @@
 const { allNotes } = require("../db");
-let id = 1;
 
 module.exports = (app) => {
     app.get("/api/notes", (req, res) => {
@@ -13,11 +12,15 @@ module.exports = (app) => {
 
     app.post("/api/notes", (req, res) => {
         let data = req.body;
-        data.id = id;
-        id += 1;
-
         allNotes.getAll()
-        .then(() => allNotes.push(data))
+        .then((info) => {
+            if(info.length) {
+                data.id = info[info.length - 1].id + 1;
+            } else {
+                data.id = 1;
+            };
+            allNotes.push(data);
+        })
         .then(response => res.json(response))
         .catch(err => {
             console.log(err);
